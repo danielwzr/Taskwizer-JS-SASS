@@ -1,5 +1,6 @@
 const ulElement = document.querySelector(".task-list");
 const newTask = document.querySelector(".input-add");
+var taskId = 0;
 
 function updateTasks() {
     const taskList = Array.from(document.getElementsByClassName("task")).map(task => task.innerHTML);
@@ -33,14 +34,17 @@ function addTask() {
 
 }
 
-function removeTask() {
-
+function removeTask(event) {
+    var taskParaRemover = document.getElementById(event.target.name)
+    taskParaRemover.remove();
 }
 
 function createTaskElement(task) {
+    taskId++;
     const li = document.createElement("li");
-    li.innerText = task;
-    li.className = "task"
+    li.innerHTML = `<a href="#" onclick="removeTask(event)" name="${taskId}">${task}</a>`;
+    li.id = taskId;
+    li.className = "task";
     ulElement.appendChild(li);
 }
 
